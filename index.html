@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+      .done {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <h3>{{title}}</h3>
+      <form @submit.prevent="addTodo">
+        <label for="newTodo">New Task:</label>
+        <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+
+        <label for="due">Due:</label>
+        <input v-model="newDue" type="datetime-local" name="newDue" id="newDue" value="">
+
+        <label for="status">Status:</label>
+        <select v-model="newStatus">
+          <option disabled value="">Please select one</option>
+          <option>Ready</option>
+          <option>Pending</option>
+          <option>Complete</option>
+          <option>Paused</option>
+        </select>
+        <br><br>
+        <label for="project">Project:</label>
+        <input v-model="project" type="text" name="project" id="project" value="">
+        <br><br>
+        <button type="submit" name="button">Save</button>
+      </form>
+      <div class="filter">
+          <label><input type="radio" v-model="selectedCategory" value="All" /> All</label>
+          <label><input type="radio" v-model="selectedCategory" value="true" /> Completed</label>
+          <label><input type="radio" v-model="selectedCategory" value="false" /> Incompleted</label>
+      </div>
+      <ul>
+        <li v-for="todo in filteredTask">
+          <input type="checkbox" v-model="todo.done">
+          <span :class="{ done: todo.done }">Task: {{todo.title}}</span>
+          <span :class="{ done: todo.done }">Due: {{todo.due}}</span>
+          <span :class="{ done: todo.done }">Status: {{todo.status}}</span>
+          <span :class="{ done: todo.done }">Project: {{todo.project}}</span>
+          <button @click="removeTodo(todo)" type="button" name="button">Remove</button>
+          <button @click="editTodo(todo)" type="button" name="button">Edit</button>
+        </li>
+
+      </ul>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>
