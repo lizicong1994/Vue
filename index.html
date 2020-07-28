@@ -2,55 +2,69 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-
+    <title>TO-DO</title>
+    <meta name="keywords" content="TODO">
+    <meta name="description" content="A Tasks Management App">
+    <meta name="author" content="Bowen Li">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      .done {
-        text-decoration: line-through;
-      }
+      body {font-family: "Lato", sans-serif}
+      .mySlides {display: none}
     </style>
   </head>
   <body>
     <main id="app">
-      <h3>{{title}}</h3>
-      <form @submit.prevent="addTodo">
-        <label for="newTodo">New Task:</label>
-        <input v-model="newTodo" type="text" name="newTodo" id="newTodo" value="">
+      <h3 class="w3-wide w3-center">{{title}}</h3>
+      <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <form @submit.prevent="addTodo">
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <div class="w3-half">
+              <input v-model="newTodo" type="text" placeholder="Task" name="newTodo" id="newTodo" value="" class="w3-input w3-border">
+            </div>
+            <!-- <label for="due">Due:</label> -->
+            <div class="w3-half">
+              <input v-model="newDue" type="datetime-local" name="newDue" id="newDue" value="" placeholder="Due" class="w3-input w3-border">
+            </div>
+            <div class="w3-half">
+              <select v-model="newStatus" class="w3-input w3-border">
+                <option disabled value="">Status</option>
+                <option>Ready</option>
+                <option>Pending</option>
+                <option>Complete</option>
+                <option>Paused</option>
+              </select>
+            </div>
+            <div class="w3-half">
+              <input v-model="project" type="text" name="project" id="project" value="" class="w3-input w3-border" placeholder="Project">
+            <button type="submit" name="button" class="w3-button w3-black w3-section w3-right">Save</button>
+          </div>
+          <!-- <label for="newTodo">New Task:</label>-->
 
-        <label for="due">Due:</label>
-        <input v-model="newDue" type="datetime-local" name="newDue" id="newDue" value="">
-
-        <label for="status">Status:</label>
-        <select v-model="newStatus">
-          <option disabled value="">Please select one</option>
-          <option>Ready</option>
-          <option>Pending</option>
-          <option>Complete</option>
-          <option>Paused</option>
-        </select>
-        <br><br>
-        <label for="project">Project:</label>
-        <input v-model="project" type="text" name="project" id="project" value="">
-        <br><br>
-        <button type="submit" name="button">Save</button>
-      </form>
-      <div class="filter">
-          <label><input type="radio" v-model="selectedCategory" value="All" /> All</label>
-          <label><input type="radio" v-model="selectedCategory" value="true" /> Completed</label>
-          <label><input type="radio" v-model="selectedCategory" value="false" /> Incompleted</label>
+        </form>
       </div>
-      <ul>
-        <li v-for="todo in filteredTask">
-          <input type="checkbox" v-model="todo.done">
-          <span :class="{ done: todo.done }">Task: {{todo.title}}</span>
-          <span :class="{ done: todo.done }">Due: {{todo.due}}</span>
-          <span :class="{ done: todo.done }">Status: {{todo.status}}</span>
-          <span :class="{ done: todo.done }">Project: {{todo.project}}</span>
-          <button @click="removeTodo(todo)" type="button" name="button">Remove</button>
-          <button @click="editTodo(todo)" type="button" name="button">Edit</button>
-        </li>
+      <div class="w3-content" style="max-width:800px">
+        <div class="filter">
+            <label><input type="radio" v-model="selectedCategory" value="All" /> All</label>
+            <label><input type="radio" v-model="selectedCategory" value="true" /> Completed</label>
+            <label><input type="radio" v-model="selectedCategory" value="false" /> Incompleted</label>
+        </div>
+        <ul>
+          <li v-for="todo in filteredTask">
+            <input type="checkbox" v-model="todo.done">
+            <span :class="{ done: todo.done }">Task: {{todo.title}}</span>
+            <span :class="{ done: todo.done }">Due: {{todo.due}}</span>
+            <span :class="{ done: todo.done }">Status: {{todo.status}}</span>
+            <span :class="{ done: todo.done }">Project: {{todo.project}}</span>
+            <button @click="removeTodo(todo)" type="button" name="button" class="w3-button w3-black w3-right">Remove</button>
 
-      </ul>
+            <button @click="editTodo(todo)" type="button" name="button"class="w3-button w3-black">Edit</button>
+          </li>
+
+        </ul>
+      </div>
+
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
