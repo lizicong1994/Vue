@@ -41,7 +41,6 @@
             <button type="submit" name="button" class="w3-button w3-black w3-section w3-right">Save</button>
           </div>
           <!-- <label for="newTodo">New Task:</label>-->
-
         </form>
       </div>
       <div class="w3-content" style="max-width:800px">
@@ -58,14 +57,10 @@
             <span :class="{ done: todo.done }">Status: {{todo.status}}</span>
             <span :class="{ done: todo.done }">Project: {{todo.project}}</span>
             <button @click="removeTodo(todo)" type="button" name="button" class="w3-button w3-black w3-right">Remove</button>
-
             <button @click="editTodo(todo)" type="button" name="button"class="w3-button w3-black">Edit</button>
           </li>
-
         </ul>
       </div>
-
-
     </main>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app.js" charset="utf-8"></script>
